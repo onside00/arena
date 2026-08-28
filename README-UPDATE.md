@@ -33,3 +33,9 @@ Do not delete your current `/var/www/sports-live/uploads/teams/` images when dep
 - Added Telegram channel button: https://t.me/+9Akzb5efjaNlMjA8
 - Hidden admin panel no longer inherits the public country/device maintenance restriction.
   Use the latest generated panel-<32hex>.php URL.
+
+
+## v2.2 UI hotfix
+- Main logo changed to small circular avatar style.
+- Site title / heading reduced for a cleaner compact hero area.
+- Telegram button redesigned with Telegram-blue pill background and a paper-plane icon.

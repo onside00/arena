@@ -33,7 +33,11 @@ $matches = $result->fetch_all(MYSQLI_ASSOC);
             <h1 id="site-title"><?= e(SITE_NAME) ?></h1>
             <p>اختر المباراة واضغط على البطاقة للمتابعة</p>
             <a class="telegram-btn" href="https://t.me/+9Akzb5efjaNlMjA8" target="_blank" rel="noopener noreferrer nofollow" aria-label="قناة أرينا 4K على تليجرام">
-                <span class="telegram-icon" aria-hidden="true">✈</span>
+                <span class="telegram-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" role="img" focusable="false" aria-hidden="true">
+                        <path d="M21.4 4.6a1.4 1.4 0 0 0-1.46-.23L3.3 10.78a1.2 1.2 0 0 0 .06 2.27l4.18 1.35 1.58 5.02a1.2 1.2 0 0 0 2.04.49l2.38-2.46 4.67 3.43a1.4 1.4 0 0 0 2.2-.84l2.38-14.04a1.4 1.4 0 0 0-.39-1.4ZM9.36 13.63l8.78-5.82-7.23 6.98-.28 2.93-1.27-4.09Zm1.96 4.03.15-1.61 1.18.86-1.33.75Z"/>
+                    </svg>
+                </span>
                 <span>قناة التليجرام</span>
             </a>
         </div>
