@@ -45,3 +45,11 @@ Do not delete your current `/var/www/sports-live/uploads/teams/` images when dep
 - Logo reduced to a true small circular avatar (72px desktop / 64px mobile).
 - Removed duplicated ARENA 4K overline and reduced site title size.
 - Rebuilt Telegram CTA as a professional Telegram-blue card button with authentic paper-plane SVG, title, subtitle, and arrow.
+
+
+## v2.4 mobile reliability + medium cards
+- Removed browser-side redirects that could falsely send real phones to maintenance.
+- Removed duplicate country/device rewrite rules from .htaccess; security.php is now the single source of truth.
+- Unknown Cloudflare country values (empty/XX) no longer falsely block a real mobile visitor.
+- Match cards increased to a medium size.
+- Telegram main label changed to: الأساسية.

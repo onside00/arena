@@ -18,7 +18,16 @@ function arena_country(): string {
 }
 
 function arena_country_allowed(): bool {
-    return in_array(arena_country(), ARENA_ALLOWED_COUNTRIES, true);
+    $country = arena_country();
+
+    // Cloudflare can occasionally return an unknown/empty country value on
+    // some mobile/privacy routes. Do not punish a real phone for that.
+    // The origin is already intended to be reachable only through Cloudflare.
+    if ($country === '' || $country === 'XX') {
+        return true;
+    }
+
+    return in_array($country, ARENA_ALLOWED_COUNTRIES, true);
 }
 
 function arena_is_mobile_phone(): bool {
@@ -26,20 +35,26 @@ function arena_is_mobile_phone(): bool {
     $mobileHint = trim((string)($_SERVER['HTTP_SEC_CH_UA_MOBILE'] ?? ''));
     $platform = strtolower(trim((string)($_SERVER['HTTP_SEC_CH_UA_PLATFORM'] ?? ''), "\"' "));
 
-    // Reject clear desktop platform signals first.
-    if (in_array($platform, ['windows', 'macos', 'chrome os', 'linux'], true)) {
-        return false;
-    }
-
     if ($ua === '') {
         return false;
     }
 
+    // Positive phone signals win first. This avoids false maintenance pages on
+    // real phones whose browser reports unusual window/platform information.
     if ((bool)preg_match('/iPhone|iPod|Android.*Mobile|Windows Phone|IEMobile|Opera Mini|Opera Mobi|BlackBerry|BB10|Mobile.*Firefox/i', $ua)) {
         return true;
     }
 
-    return $mobileHint === '?1';
+    if ($mobileHint === '?1' && !in_array($platform, ['windows', 'macos', 'chrome os', 'linux'], true)) {
+        return true;
+    }
+
+    // Clear desktop/laptop platforms are denied.
+    if (in_array($platform, ['windows', 'macos', 'chrome os', 'linux'], true)) {
+        return false;
+    }
+
+    return false;
 }
 
 function arena_show_maintenance(): never {

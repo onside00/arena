@@ -13,19 +13,8 @@ Options -Indexes
     RewriteRule ^create-admin-entry\.sh$ - [F,L,NC]
     RewriteRule ^admin\.php$ - [R=404,L,NC]
 
-    # Foreign countries -> maintenance. Admin is still restricted by PHP too.
-    RewriteCond %{REQUEST_URI} !^/maintenance\.php$ [NC]
-    RewriteCond %{REQUEST_URI} !^/assets/ [NC]
-    RewriteCond %{REQUEST_URI} !^/panel-[a-f0-9]{32}\.php$ [NC]
-    RewriteCond %{HTTP:CF-IPCountry} !^(DZ|BH|KM|DJ|EG|IQ|JO|KW|LB|LY|MR|MA|OM|PS|QA|SA|SO|SD|SY|TN|AE|YE)$ [NC]
-    RewriteRule ^ /maintenance.php [L]
-
-    # Laptop/desktop -> maintenance only. No IP ban.
-    RewriteCond %{REQUEST_URI} !^/maintenance\.php$ [NC]
-    RewriteCond %{REQUEST_URI} !^/assets/ [NC]
-    RewriteCond %{REQUEST_URI} !^/panel-[a-f0-9]{32}\.php$ [NC]
-    RewriteCond %{HTTP_USER_AGENT} !(iPhone|iPod|Android.*Mobile|Windows[[:space:]]Phone|IEMobile|Opera[[:space:]]Mini|Opera[[:space:]]Mobi|BlackBerry|BB10|Mobile.*Firefox) [NC]
-    RewriteRule ^ /maintenance.php [L]
+    # Public country/device access is enforced once in security.php.
+    # Keeping it out of mod_rewrite prevents duplicate/contradictory mobile detection.
 </IfModule>
 
 <FilesMatch "^(config\.php|security\.php|admin_core\.php|database\.sql|create-admin-entry\.sh|\.env|composer\.(json|lock))$">
