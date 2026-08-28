@@ -53,3 +53,8 @@ Do not delete your current `/var/www/sports-live/uploads/teams/` images when dep
 - Unknown Cloudflare country values (empty/XX) no longer falsely block a real mobile visitor.
 - Match cards increased to a medium size.
 - Telegram main label changed to: الأساسية.
+
+
+## v2.5 UI tweak
+- Telegram button is compact again in the same hero position and shows only the Telegram icon + "الأساسية".
+- Match cards enlarged slightly with larger club logos and spacing.
