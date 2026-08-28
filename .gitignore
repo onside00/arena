@@ -1,0 +1,4 @@
+panel-*.php
+check-env.php
+.env
+*.log
