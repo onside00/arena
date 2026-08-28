@@ -27,22 +27,29 @@ $matches = $result->fetch_all(MYSQLI_ASSOC);
 <body class="public-body">
 <main class="public-shell">
     <section class="brand-hero" aria-labelledby="site-title">
-        <img class="brand-logo-large" src="assets/img/arena4k-logo.png" alt="Arena 4K">
-        <div class="brand-copy">
-            <h1 id="site-title"><?= e(SITE_NAME) ?></h1>
-            <p>اختر المباراة واضغط على البطاقة للمتابعة</p>
-            <a class="telegram-btn" href="https://t.me/+9Akzb5efjaNlMjA8" target="_blank" rel="noopener noreferrer nofollow" aria-label="الانضمام إلى قناة أرينا على تليجرام">
+        <div class="top-header">
+            <a class="telegram-btn telegram-btn-top"
+               href="https://t.me/+9Akzb5efjaNlMjA8"
+               target="_blank"
+               rel="noopener noreferrer nofollow"
+               aria-label="الانضمام إلى قناة أرينا على تليجرام">
                 <span class="telegram-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" role="img" focusable="false" aria-hidden="true">
                         <path d="M21.78 3.46a1.55 1.55 0 0 0-1.63-.22L3.16 9.8c-1.1.43-1.08 1.04-.2 1.31l4.36 1.36 1.68 5.2c.2.56.1.78.7.78.46 0 .66-.21.91-.45l2.1-2.04 4.36 3.22c.8.44 1.38.21 1.58-.74l2.7-12.73c.28-1.13-.43-1.64-1.57-1.25ZM8 12.15l9.86-6.22c.49-.3.94-.14.57.2l-8.14 7.35-.32 3.42L8 12.15Z"/>
                     </svg>
                 </span>
-                <span class="telegram-copy">
-                    <strong>قناة التليجرام</strong>
-                    <small>انضم لمتابعة المباريات والتحديثات</small>
-                </span>
-                <span class="telegram-arrow" aria-hidden="true">←</span>
+                <span>قناة التليجرام</span>
             </a>
+
+            <div class="top-header-title">أرينا لايف</div>
+        </div>
+
+        <div class="brand-copy">
+            <div class="brand-logo-circle">
+                <img class="brand-logo-large" src="assets/img/arena4k-logo.png" alt="Arena 4K">
+            </div>
+            <h1 id="site-title"><?= e(SITE_NAME) ?></h1>
+            <p>اختر المباراة واضغط على البطاقة للمتابعة</p>
         </div>
     </section>
 
