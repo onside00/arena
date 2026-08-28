@@ -1,89 +1,215 @@
 <?php
 declare(strict_types=1);
+
 require __DIR__ . '/security.php';
 arena_enforce_public_access();
 require __DIR__ . '/config.php';
 
 $sql = "
-    SELECT id, team1_name, team1_logo, team2_name, team2_logo
+    SELECT
+        id,
+        team1_name,
+        team1_logo,
+        team2_name,
+        team2_logo,
+        league,
+        match_time
     FROM matches
     WHERE status = 'active'
       AND match_time >= DATE_SUB(NOW(), INTERVAL 24 HOUR)
     ORDER BY display_order ASC, match_time ASC, id ASC
 ";
+
 $result = $db->query($sql);
 $matches = $result->fetch_all(MYSQLI_ASSOC);
+
+function arena_match_state(string $matchTime): array {
+    $start = new DateTimeImmutable($matchTime);
+    $now = new DateTimeImmutable('now');
+
+    $seconds = $now->getTimestamp() - $start->getTimestamp();
+
+    if ($seconds >= -900 && $seconds <= 3 * 3600) {
+        return ['live', 'مباشر'];
+    }
+
+    if ($seconds > 3 * 3600) {
+        return ['ended', 'انتهت'];
+    }
+
+    return ['upcoming', 'قريباً'];
+}
 ?>
 <!doctype html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-    <meta name="theme-color" content="#0a1530">
+    <meta name="theme-color" content="#0f172a">
+
     <title><?= e(SITE_NAME) ?></title>
-    <meta name="description" content="أرينا 4K - مباريات اليوم">
+    <meta name="description" content="أرينا لايف - مباريات اليوم والبث المباشر">
+
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="public-body">
-<main class="public-shell">
-    <section class="brand-hero" aria-labelledby="site-title">
-        <img class="brand-logo-large" src="assets/img/arena4k-logo.png" alt="Arena 4K">
-        <div class="brand-copy">
-            <h1 id="site-title"><?= e(SITE_NAME) ?></h1>
-            <p>اختر المباراة واضغط على البطاقة للمتابعة</p>
-            <a class="telegram-btn" href="https://t.me/+9Akzb5efjaNlMjA8" target="_blank" rel="noopener noreferrer nofollow" aria-label="قناة أرينا الأساسية على تليجرام">
-                <span class="telegram-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24" role="img" focusable="false" aria-hidden="true">
-                        <path d="M21.78 3.46a1.55 1.55 0 0 0-1.63-.22L3.16 9.8c-1.1.43-1.08 1.04-.2 1.31l4.36 1.36 1.68 5.2c.2.56.1.78.7.78.46 0 .66-.21.91-.45l2.1-2.04 4.36 3.22c.8.44 1.38.21 1.58-.74l2.7-12.73c.28-1.13-.43-1.64-1.57-1.25ZM8 12.15l9.86-6.22c.49-.3.94-.14.57.2l-8.14 7.35-.32 3.42L8 12.15Z"/>
-                    </svg>
-                </span>
-                <span>الأساسية</span>
-            </a>
-        </div>
-    </section>
 
-    <section class="matches-section" aria-label="المباريات">
+<body class="public-body">
+
+<header class="public-header">
+    <div class="public-header-inner">
+
+        <a
+            class="telegram-home"
+            href="https://t.me/onside_plus"
+            target="_blank"
+            rel="noopener noreferrer nofollow"
+            aria-label="الرئيسية على تليجرام"
+        >
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path d="M21.9 4.1c.3-1.3-.5-1.8-1.6-1.4L2.8 9.5c-1.2.5-1.2 1.2-.2 1.5l4.5 1.4 1.7 5.3c.2.6.1.8.7.8.5 0 .7-.2 1-.5l2.2-2.2 4.6 3.4c.9.5 1.5.2 1.7-.8l2.9-14.3ZM8 12.1l10.4-6.5c.5-.3 1-.1.6.2l-8.6 7.8-.3 3.6L8 12.1Z"/>
+            </svg>
+            <span>الرئيسية</span>
+        </a>
+
+        <div class="public-brand" aria-label="<?= e(SITE_NAME) ?>">
+            <div class="public-logo-ring">
+                <img src="assets/img/logo.png" alt="<?= e(SITE_NAME) ?>">
+            </div>
+            <h1><?= e(SITE_NAME) ?></h1>
+        </div>
+
+        <div class="public-header-spacer" aria-hidden="true"></div>
+
+    </div>
+</header>
+
+<main class="public-container">
+
+    <section class="matches-section" aria-label="مباريات اليوم">
+
+        <div class="matches-heading">
+            <div>
+                <span class="matches-eyebrow">LIVE MATCHES</span>
+                <h2>مباريات اليوم</h2>
+            </div>
+
+            <span class="matches-count">
+                <?= count($matches) ?> مباراة
+            </span>
+        </div>
+
         <?php if (!$matches): ?>
+
             <div class="empty-state">
                 <span class="empty-ball">⚽</span>
                 <h2>لا توجد مباريات حالياً</h2>
-                <p>ستظهر المباريات هنا عند إضافتها.</p>
+                <p>ستظهر المباريات هنا عند إضافتها من لوحة التحكم.</p>
             </div>
+
         <?php else: ?>
-            <div class="matches-list">
+
+            <div class="matches-grid">
+
                 <?php foreach ($matches as $match): ?>
-                    <a class="match-card" href="go.php?id=<?= (int)$match['id'] ?>" rel="nofollow">
-                        <div class="team-block">
-                            <div class="team-logo-wrap">
-                                <?php if (!empty($match['team1_logo'])): ?>
-                                    <img class="team-logo" src="uploads/teams/<?= e(safe_logo_name($match['team1_logo'])) ?>" alt="<?= e($match['team1_name']) ?>" loading="lazy">
-                                <?php else: ?>
-                                    <span class="team-logo-fallback"><?= e(mb_substr($match['team1_name'], 0, 1, 'UTF-8')) ?></span>
+                    <?php
+                        [$stateClass, $stateText] = arena_match_state($match['match_time']);
+                        $displayTime = (new DateTimeImmutable($match['match_time']))->format('H:i');
+                    ?>
+
+                    <article class="match-card">
+
+                        <div class="match-card-top">
+                            <span class="match-league">
+                                <?= e($match['league']) ?>
+                            </span>
+
+                            <span class="match-status <?= e($stateClass) ?>">
+                                <?php if ($stateClass === 'live'): ?>
+                                    <span class="live-dot" aria-hidden="true"></span>
                                 <?php endif; ?>
-                            </div>
-                            <strong><?= e($match['team1_name']) ?></strong>
+
+                                <?= e($stateText) ?>
+                            </span>
                         </div>
 
-                        <span class="versus-dot" aria-hidden="true">VS</span>
-
-                        <div class="team-block">
-                            <div class="team-logo-wrap">
-                                <?php if (!empty($match['team2_logo'])): ?>
-                                    <img class="team-logo" src="uploads/teams/<?= e(safe_logo_name($match['team2_logo'])) ?>" alt="<?= e($match['team2_name']) ?>" loading="lazy">
-                                <?php else: ?>
-                                    <span class="team-logo-fallback"><?= e(mb_substr($match['team2_name'], 0, 1, 'UTF-8')) ?></span>
-                                <?php endif; ?>
-                            </div>
-                            <strong><?= e($match['team2_name']) ?></strong>
+                        <div class="match-time">
+                            <?= e($displayTime) ?>
                         </div>
-                    </a>
+
+                        <div class="match-teams">
+
+                            <div class="match-team">
+                                <div class="match-team-logo">
+                                    <?php if (!empty($match['team1_logo'])): ?>
+                                        <img
+                                            src="uploads/teams/<?= e(safe_logo_name($match['team1_logo'])) ?>"
+                                            alt="<?= e($match['team1_name']) ?>"
+                                            loading="lazy"
+                                        >
+                                    <?php else: ?>
+                                        <span class="team-logo-fallback">
+                                            <?= e(mb_substr($match['team1_name'], 0, 1, 'UTF-8')) ?>
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
+
+                                <strong>
+                                    <?= e($match['team1_name']) ?>
+                                </strong>
+                            </div>
+
+                            <span class="match-vs" aria-hidden="true">VS</span>
+
+                            <div class="match-team">
+                                <div class="match-team-logo">
+                                    <?php if (!empty($match['team2_logo'])): ?>
+                                        <img
+                                            src="uploads/teams/<?= e(safe_logo_name($match['team2_logo'])) ?>"
+                                            alt="<?= e($match['team2_name']) ?>"
+                                            loading="lazy"
+                                        >
+                                    <?php else: ?>
+                                        <span class="team-logo-fallback">
+                                            <?= e(mb_substr($match['team2_name'], 0, 1, 'UTF-8')) ?>
+                                        </span>
+                                    <?php endif; ?>
+                                </div>
+
+                                <strong>
+                                    <?= e($match['team2_name']) ?>
+                                </strong>
+                            </div>
+
+                        </div>
+
+                        <a
+                            class="watch-live-btn"
+                            href="go.php?id=<?= (int)$match['id'] ?>"
+                            rel="nofollow"
+                        >
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+
+                            <span>مشاهدة المباراة</span>
+                        </a>
+
+                    </article>
+
                 <?php endforeach; ?>
+
             </div>
+
         <?php endif; ?>
+
     </section>
 
-    <footer class="public-footer">© <?= date('Y') ?> <?= e(SITE_NAME) ?></footer>
+    <footer class="public-footer">
+        © <?= date('Y') ?> <?= e(SITE_NAME) ?>
+    </footer>
+
 </main>
+
 <script src="assets/js/app.js"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@ define('DB_NAME', getenv('SPORTS_DB_NAME') ?: 'sports_live');
 define('DB_USER', getenv('SPORTS_DB_USER') ?: 'sports_user');
 define('DB_PASS', getenv('SPORTS_DB_PASS') ?: 'CHANGE_ME_DB_PASSWORD');
 
-define('SITE_NAME', 'أرينا 4K');
+define('SITE_NAME', 'أرينا لايف');
 define('SITE_TIMEZONE', 'Asia/Baghdad');
 define('ADMIN_PASSWORD_HASH', getenv('SPORTS_ADMIN_PASSWORD_HASH') ?: '');
 
