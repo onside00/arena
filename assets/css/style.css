@@ -32,13 +32,22 @@ img{max-width:100%}
 .public-shell{width:min(720px,100%);margin:0 auto;padding:22px 16px 26px}
 .brand-hero{text-align:center;padding:10px 0 26px}
 .brand-logo-large{
-  display:block;width:min(260px,72vw);aspect-ratio:1/1;object-fit:cover;margin:0 auto 18px;
-  border-radius:26px;box-shadow:0 22px 65px rgba(0,0,0,.32);border:1px solid rgba(255,255,255,.06)
+  display:block;width:min(142px,36vw);aspect-ratio:1/1;object-fit:cover;margin:0 auto 12px;
+  border-radius:22px;box-shadow:0 16px 42px rgba(0,0,0,.30);border:1px solid rgba(255,255,255,.07)
 }
 .brand-copy{max-width:520px;margin-inline:auto}
 .brand-overline{margin:0;color:#aab8ff;font-size:.78rem;font-weight:900;letter-spacing:.24em}
 .brand-copy h1{margin:6px 0 7px;font-size:clamp(2rem,8vw,3.2rem);line-height:1.15;letter-spacing:-.03em}
 .brand-copy p:last-child{margin:0;color:var(--muted);font-size:.96rem}
+.telegram-btn{
+  width:max-content;max-width:100%;margin:15px auto 0;display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:10px 17px;border-radius:13px;color:#fff;font-size:.9rem;font-weight:900;
+  background:linear-gradient(135deg,#229ed9,#1787c2);border:1px solid rgba(255,255,255,.12);
+  box-shadow:0 12px 30px rgba(34,158,217,.20);transition:transform .16s ease,filter .16s ease
+}
+.telegram-btn:hover{transform:translateY(-1px);filter:brightness(1.06)}
+.telegram-btn:active{transform:scale(.985)}
+.telegram-icon{font-size:1rem;line-height:1;transform:rotate(-12deg)}
 .matches-section{padding:0 0 28px}
 .matches-list{display:grid;grid-template-columns:1fr;gap:11px}
 .match-card{
@@ -112,7 +121,7 @@ code{color:#bdc8ff;background:#081225;border-radius:7px;padding:4px 6px}
 }
 @media(max-width:620px){
   .public-shell{padding-inline:12px}
-  .brand-logo-large{width:min(230px,68vw);border-radius:22px}
+  .brand-logo-large{width:min(118px,34vw);border-radius:18px}
   .match-card{min-height:96px;padding:11px 12px;grid-template-columns:1fr 36px 1fr}
   .team-logo-wrap{width:50px;height:50px;border-radius:14px}
   .team-block{gap:8px}.team-block strong{font-size:.86rem}

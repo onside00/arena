@@ -1,14 +1,16 @@
 <?php
 declare(strict_types=1);
 require __DIR__ . '/security.php';
-arena_enforce_admin_country();
-require __DIR__ . '/config.php';
 
 $adminEntry = basename((string)($_SERVER['SCRIPT_NAME'] ?? ''));
 if (!defined('ARENA_ADMIN_ENTRY') || !preg_match('/^panel-[a-f0-9]{32}\.php$/', $adminEntry)) {
     http_response_code(404);
     exit;
 }
+
+// The hidden admin entry is intentionally exempt from public country/device restrictions.
+// Access is still protected by the randomized URL, password, CSRF, session controls, and login throttling.
+require __DIR__ . '/config.php';
 
 header('X-Robots-Tag: noindex, nofollow, noarchive');
 header('Cache-Control: no-store, max-age=0');

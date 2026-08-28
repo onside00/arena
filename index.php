@@ -32,6 +32,10 @@ $matches = $result->fetch_all(MYSQLI_ASSOC);
             <p class="brand-overline">ARENA 4K</p>
             <h1 id="site-title"><?= e(SITE_NAME) ?></h1>
             <p>اختر المباراة واضغط على البطاقة للمتابعة</p>
+            <a class="telegram-btn" href="https://t.me/+9Akzb5efjaNlMjA8" target="_blank" rel="noopener noreferrer nofollow" aria-label="قناة أرينا 4K على تليجرام">
+                <span class="telegram-icon" aria-hidden="true">✈</span>
+                <span>قناة التليجرام</span>
+            </a>
         </div>
     </section>
 

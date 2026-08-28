@@ -26,3 +26,10 @@ Otherwise the old Worker will continue banning IP addresses even after the websi
 
 ## Existing uploads
 Do not delete your current `/var/www/sports-live/uploads/teams/` images when deploying. The update only changes the `.htaccess` in that folder.
+
+
+## v2.1 hotfix
+- Main Arena 4K image reduced substantially on desktop and mobile.
+- Added Telegram channel button: https://t.me/+9Akzb5efjaNlMjA8
+- Hidden admin panel no longer inherits the public country/device maintenance restriction.
+  Use the latest generated panel-<32hex>.php URL.
