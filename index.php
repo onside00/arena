@@ -40,7 +40,7 @@ $matches = $result->fetch_all(MYSQLI_ASSOC);
             <div class="arena-header-side arena-header-side-right">
                 <a
                     class="arena-telegram-btn"
-                    href="https://t.me/onside_plus"
+                    href="https://t.me/+9Akzb5efjaNlMjA8"
                     target="_blank"
                     rel="noopener noreferrer nofollow"
                     aria-label="فتح قناة التليجرام"
