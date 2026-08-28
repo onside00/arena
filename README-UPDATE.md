@@ -39,3 +39,9 @@ Do not delete your current `/var/www/sports-live/uploads/teams/` images when dep
 - Main logo changed to small circular avatar style.
 - Site title / heading reduced for a cleaner compact hero area.
 - Telegram button redesigned with Telegram-blue pill background and a paper-plane icon.
+
+
+## v2.3 compact header
+- Logo reduced to a true small circular avatar (72px desktop / 64px mobile).
+- Removed duplicated ARENA 4K overline and reduced site title size.
+- Rebuilt Telegram CTA as a professional Telegram-blue card button with authentic paper-plane SVG, title, subtitle, and arrow.

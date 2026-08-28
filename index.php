@@ -29,16 +29,19 @@ $matches = $result->fetch_all(MYSQLI_ASSOC);
     <section class="brand-hero" aria-labelledby="site-title">
         <img class="brand-logo-large" src="assets/img/arena4k-logo.png" alt="Arena 4K">
         <div class="brand-copy">
-            <p class="brand-overline">ARENA 4K</p>
             <h1 id="site-title"><?= e(SITE_NAME) ?></h1>
             <p>اختر المباراة واضغط على البطاقة للمتابعة</p>
-            <a class="telegram-btn" href="https://t.me/+9Akzb5efjaNlMjA8" target="_blank" rel="noopener noreferrer nofollow" aria-label="قناة أرينا 4K على تليجرام">
+            <a class="telegram-btn" href="https://t.me/+9Akzb5efjaNlMjA8" target="_blank" rel="noopener noreferrer nofollow" aria-label="الانضمام إلى قناة أرينا على تليجرام">
                 <span class="telegram-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24" role="img" focusable="false" aria-hidden="true">
-                        <path d="M21.4 4.6a1.4 1.4 0 0 0-1.46-.23L3.3 10.78a1.2 1.2 0 0 0 .06 2.27l4.18 1.35 1.58 5.02a1.2 1.2 0 0 0 2.04.49l2.38-2.46 4.67 3.43a1.4 1.4 0 0 0 2.2-.84l2.38-14.04a1.4 1.4 0 0 0-.39-1.4ZM9.36 13.63l8.78-5.82-7.23 6.98-.28 2.93-1.27-4.09Zm1.96 4.03.15-1.61 1.18.86-1.33.75Z"/>
+                        <path d="M21.78 3.46a1.55 1.55 0 0 0-1.63-.22L3.16 9.8c-1.1.43-1.08 1.04-.2 1.31l4.36 1.36 1.68 5.2c.2.56.1.78.7.78.46 0 .66-.21.91-.45l2.1-2.04 4.36 3.22c.8.44 1.38.21 1.58-.74l2.7-12.73c.28-1.13-.43-1.64-1.57-1.25ZM8 12.15l9.86-6.22c.49-.3.94-.14.57.2l-8.14 7.35-.32 3.42L8 12.15Z"/>
                     </svg>
                 </span>
-                <span>قناة التليجرام</span>
+                <span class="telegram-copy">
+                    <strong>قناة التليجرام</strong>
+                    <small>انضم لمتابعة المباريات والتحديثات</small>
+                </span>
+                <span class="telegram-arrow" aria-hidden="true">←</span>
             </a>
         </div>
     </section>
