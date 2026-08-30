@@ -1,38 +1,38 @@
 :root{
-  --bg:#071126;
-  --panel:#0c1831;
-  --blue:#2f46a7;
-  --blue2:#5570df;
+  --bg:#07080c;
+  --panel:#11131b;
+  --brand:#e50914;
+  --brand2:#ff2e3b;
   --text:#f8faff;
-  --muted:#a8b4cf;
-  --line:rgba(123,148,221,.18)
+  --muted:#94a3b8;
+  --line:rgba(255,255,255,.08)
 }
 *{box-sizing:border-box}
 html,body{min-height:100%}
 body{
   margin:0;min-height:100vh;padding:22px;display:grid;place-items:center;
-  color:var(--text);font-family:Tahoma,Arial,sans-serif;
+  color:var(--text);font-family:'Cairo',Tahoma,Arial,sans-serif;
   background:
-    radial-gradient(circle at 50% -15%,rgba(80,104,214,.30),transparent 42%),
-    linear-gradient(180deg,#0a1730 0%,var(--bg) 65%);
+    radial-gradient(circle at 50% -15%,rgba(229,9,20,.18),transparent 42%),
+    linear-gradient(180deg,#0f1118 0%,var(--bg) 65%);
 }
 .maintenance-shell{width:min(520px,100%)}
 .maintenance-card{
   padding:30px 24px 34px;text-align:center;border:1px solid var(--line);border-radius:26px;
-  background:linear-gradient(180deg,rgba(255,255,255,.035),transparent),rgba(12,24,49,.95);
-  box-shadow:0 28px 90px rgba(0,0,0,.42)
+  background:linear-gradient(180deg,rgba(255,255,255,.02),transparent),rgba(17,19,27,.95);
+  box-shadow:0 28px 90px rgba(0,0,0,.65)
 }
 .maintenance-logo{
   display:block;width:min(230px,70vw);aspect-ratio:1/1;object-fit:cover;margin:0 auto 20px;border-radius:24px;
-  box-shadow:0 18px 48px rgba(0,0,0,.28)
+  box-shadow:0 18px 48px rgba(0,0,0,.50)
 }
-.maintenance-kicker{margin:0;color:#9daeff;font-size:.78rem;font-weight:900;letter-spacing:.22em}
+.maintenance-kicker{margin:0;color:#ff4d5a;font-size:.78rem;font-weight:900;letter-spacing:.22em}
 h1{font-size:clamp(1.9rem,7vw,2.75rem);line-height:1.25;margin:10px 0 12px}
 .maintenance-text{max-width:410px;margin:0 auto;color:var(--muted);line-height:1.9;font-size:.98rem}
 .maintenance-button{
   display:inline-flex;align-items:center;justify-content:center;min-width:210px;margin-top:26px;padding:13px 22px;
   border-radius:14px;color:#fff;text-decoration:none;font-weight:900;
-  background:linear-gradient(135deg,var(--blue),var(--blue2));
-  box-shadow:0 12px 32px rgba(47,70,167,.32);transition:transform .18s ease,filter .18s ease
+  background:linear-gradient(135deg,var(--brand),var(--brand2));
+  box-shadow:0 12px 32px rgba(229,9,20,.35);transition:transform .18s ease,filter .18s ease
 }
-.maintenance-button:hover{transform:translateY(-2px);filter:brightness(1.07)}
+.maintenance-button:hover{transform:translateY(-2px);filter:brightness(1.08)}
